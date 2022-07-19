@@ -1,0 +1,10 @@
+const svg = d3.select('body')
+              .append('svg')
+              .attr('height', 500)
+              .attr('width', 800)
+
+svg.append('rect')
+  .attr('width', 300)
+  .attr('height', 200)
+  .attr('x', 50)
+  .attr('y', 50)
