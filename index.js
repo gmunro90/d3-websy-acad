@@ -1,25 +1,34 @@
-const svg = d3.select('body')
-              .append('svg')
+const svg = d3.select('body').append('svg')
               .attr('height', 500)
               .attr('width', 800)
 
-const data = [
-                {category: "a", value: 100},
-                {category: "b", value: 200},
-                {category: "c", value: 50},
-                {category: "d", value: 150},
-                {category: "e", value: 250},
-                {category: "f", value: 100}
-            ]
+const xAxisGroup = svg.append('g')
 
-const boxes = svg.selectAll('rect')
-                .data(data)
-                .enter()
-                .append('rect')
-                .attr('width', 100)
-                .attr('height', d => {
-                  return d.value
-                })
-                .attr('x', (d, i) => {
-                  return i * 110
-                })
+function renderBars(data) {
+  const color = randomColor()
+  const boxes = svg.selectAll('rect')
+                    .data(data)
+
+
+boxes.exit()
+      .transition()
+      .attr('opacity', 0)
+      .remove()
+
+boxes.transition()
+      .attr('height', d => {
+        return d.value
+      })
+      .style('fill', color)
+
+boxes.enter()
+      .append('rect')
+      .attr('width', 100)
+      .attr('height', d => {
+        return d.value
+      })
+      .attr('x', (d, i) => {
+        return i * 110
+      })
+
+}
